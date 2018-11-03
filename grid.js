@@ -85,6 +85,9 @@ function gridData(cost) {
     console.log('accumulated cost: ' + accumulatedCost);
     document.getElementById('totalDisplay').innerHTML = "$" + commify(accumulatedCost);
 
+    var remaining = totalCost - accumulatedCost;
+    document.getElementById('remainder').innerHTML = "$" + commify(remaining);
+
     fillBoxes = accumulatedCost / costPerSquare;
     console.log('fills boxes: ' + fillBoxes);
 
@@ -195,6 +198,10 @@ for (var i=0; i < options.length; i++) {
     checkbox.name = opt.name;
     checkbox.value = opt.cost;
     checkbox.id = i;
+    checkbox.onclick = function() {
+        console.log('clicked for ' + opt.name);
+        gridData(opt.cost);
+    }
 
     var label = document.createElement('label')
     label.htmlFor = i;
