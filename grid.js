@@ -11,10 +11,16 @@ console.log('cost per square is ' + costPerSquare);
 var accumulatedCost = 0;
 var fillBoxes = 0;
 
+// https://stackoverflow.com/a/2901298
+function commify(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function gridData(cost) {
     console.log('gridData adding cost ' + cost);
     accumulatedCost += cost;
     console.log('accumulated cost: ' + accumulatedCost);
+    document.getElementById('totalDisplay').innerHTML = "$" + commify(accumulatedCost);
 
     fillBoxes = accumulatedCost / costPerSquare;
     console.log('fills boxes: ' + fillBoxes);
