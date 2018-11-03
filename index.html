@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Quest Budget Game</title>
+  </head>
+  <body>
+    <div class="checkbox">
+      <label><input type="checkbox" value="">Apple: $768</label>
+    </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Northeast High School (Philadelphia) $187/student</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Can renovate 164 homes $127,000</label>
+      </div>
+      </div>
+
+    <script type="text/javascript">
+      let clicks = 0;
+      function onClick() {
+        clicks += 1;
+        document.getElementById("clicks").innerHTML = clicks;
+      };
+    </script>
+    <button type="button" onClick="onClick()">Click me</button>
+    <p>Clicks: <a id="clicks">0</a></p>
+
+
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
