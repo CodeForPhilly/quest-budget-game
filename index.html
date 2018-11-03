@@ -6,6 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title>Quest Budget Game</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <style>
+      div.tooltip {
+            position: absolute;
+            text-align: center;
+            width: 60px;
+            height: 28px;
+            padding: 2px;
+            font: 12px sans-serif;
+            background: lightsteelblue;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+    </style>
   </head>
   <body>
     <div class="checkbox">
@@ -26,6 +41,7 @@
         document.getElementById("clicks").innerHTML = clicks;
       };
     </script>
+    <button id="updateBtn">Update</button>
     <button type="button" onClick="onClick()">Click me</button>
     <p>Clicks: <a id="clicks">0</a></p>
 
@@ -33,6 +49,7 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="main.js"></script>
+    <div id="grid"></div>
+    <script src="grid.js" type="text/javascript"></script>
   </body>
 </html>
