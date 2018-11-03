@@ -1,0 +1,82 @@
+---
+title: "gun violence analysis"
+output:
+  html_document:
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(lubridate)
+library(tidyverse)
+```
+
+### Data
+
+```{r, eval = FALSE}
+# set eval to TRUE to download data
+data_url <- "https://phl.carto.com/api/v2/sql?q=SELECT+*,+ST_Y(the_geom)+AS+lat,+ST_X(the_geom)+AS+lng+FROM+incidents_part1_part2&filename=incidents_part1_part2&format=csv&skipfields=cartodb_id"
+
+download.file(data_url, "01-crime-data.csv")
+
+```
+
+
+* data source: https://www.opendataphilly.org/dataset/crime-incidents
+* [metadata](http://metadata.phila.gov/#home/datasetdetails/5543868920583086178c4f8e/representationdetails/570e7621c03327dc14f4b68d/)
+
+### Cost of gun crime
+
+* A document estimates the cost of the following gun related crimes (PERF presentation. **todo, include in repo?**)..
+  * Homicide: 5 million
+  * Aggravated assault: 55 thousand
+  * Armed robbery: 50 thousand
+
+The estimates are pulled from Cohen & Piquero (2009).
+
+Below, I reproduce the calculations from the PERF presentation, using the open Philly data. (It appears that this may have been their data source).
+
+```{r warning = FALSE, message = FALSE}
+gun_crime_cols <- c(
+  aaf = "Aggravated Assault Firearm",
+  homicide = "Homicide - Criminal",
+  robbery = "Robbery Firearm"
+  )
+
+costs <- c(
+  55* 1000,
+  5000 * 1000,
+  50 * 1000
+)
+names(costs) <- gun_crime_cols
+
+d <- read_csv("01-crime-data.csv")
+
+year_counts <-
+  d %>%
+  mutate(year = year(dispatch_date)) %>% 
+  count(year, text_general_code)
+
+year_costs <-
+  year_counts %>%
+  filter(text_general_code %in% gun_crime_cols) %>%
+  mutate(cost = costs[text_general_code] * n)
+
+year_costs %>%
+  ggplot(aes(year, n, color = text_general_code)) +
+  geom_point(alpha = .5) +
+  ylim(c(0, NA))
+
+year_costs %>%
+  mutate(cost = cost * (10^(-6))) %>%
+  ggplot(aes(year, cost, color = text_general_code)) +
+  geom_point() +
+  geom_line(aes(group = text_general_code), alpha = .5) +
+  ylim(c(0, NA)) +
+  labs(y = "cost (in millions)")
+
+year_costs %>%
+  View()
+```
+
+
