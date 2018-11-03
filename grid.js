@@ -11,6 +11,69 @@ console.log('cost per square is ' + costPerSquare);
 var accumulatedCost = 0;
 var fillBoxes = 0;
 
+var options = [
+  {
+    "name": "Skatepark",
+    "description": "8,000 square feet of neighborhood skatepark will serve a neighborhood of about 25,000 residents.",
+    "cost": 320000,
+    "quantity": null
+  },
+  {
+    "name": "Computers",
+    "description": "Buy Macbooks for students of Northeast Philadelphia High School (3600 students).",
+    "cost": 2764800,
+    "quantity": null
+  },
+  {
+    "name": "Music Education Program",
+    "description": "Fund a K-12 Music Education program for Northeast Philadelphia, 3600 students",
+    "cost": 673200,
+    "quantity": null
+  },
+  {
+    "name": "Science Lab",
+    "description": "NSTA recommends 1,440 square feet for one lab serving 24 students.",
+    "cost": 342500,
+    "quantity": null
+  },
+  {
+    "name": "Math Camp Tuition",
+    "description": "Send one student to summer math camp.",
+    "cost": 1522,
+    "quantity": null
+  },
+  {
+    "name": "Home Renovation",
+    "description": "Renovate a Northeast Philly Home.",
+    "cost": 127000,
+    "quantity": null
+  },
+  {
+    "name": "Home Construction",
+    "description": "Build a Northeast Philly Home.",
+    "cost": 295000,
+    "quantity": null
+  },
+  {
+    "name": "Cultural Center",
+    "description": "Build a Cultural or Performing Arts Center.",
+    "cost": 18500000,
+    "quantity": null
+  },
+  {
+    "name": "Philadelphia Works",
+    "description": "Philadelphia Works connects employers to a skilled workforce and helps individuals develop the skills needed to thrive in the workplace. Cover one year of their operational costs.",
+    "cost": 100000000,
+    "quantity": null
+  },
+  {
+    "name": "Playground",
+    "description": "One acre of a Philadelphia playground.",
+    "cost": 3600,
+    "quantity": null
+  }
+];
+
 // https://stackoverflow.com/a/2901298
 function commify(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -119,3 +182,31 @@ function updateButton() {
 }
 
 document.getElementById('updateBtn').onclick = updateButton;
+var container = document.getElementById('spendOptions');
+
+for (var i=0; i < options.length; i++) {
+    var opt = options[i];
+    console.log(opt);
+
+    var checkboxDiv = document.createElement('div');
+    checkboxDiv.classList.add('checkbox');
+    var checkbox = document.createElement('input');
+    checkbox.type = "checkbox";
+    checkbox.name = opt.name;
+    checkbox.value = opt.cost;
+    checkbox.id = i;
+
+    var label = document.createElement('label')
+    label.htmlFor = i;
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(opt.name + ": $" + commify(opt.cost)));
+
+    checkboxDiv.appendChild(label);
+    container.appendChild(checkboxDiv);
+
+    var descDiv = document.createElement('div');
+    descDiv.appendChild(document.createTextNode(opt.description));
+    descDiv.classList.add('option-desc');
+    container.appendChild(descDiv);
+    container.appendChild(document.createElement('br'));
+}
