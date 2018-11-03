@@ -86,14 +86,6 @@ var column = row.selectAll(".square")
         return d.id >= fillBoxes ? "#fff" : "#2C93E8";
     })
     .style("stroke", "#222")
-    .on('click', function(d) {
-       d.click++;
-       console.log(d.id);
-       if ((d.click)%4 == 0 ) { d3.select(this).style("fill","#fff"); }
-       if ((d.click)%4 == 1 ) { d3.select(this).style("fill","#2C93E8"); }
-       if ((d.click)%4 == 2 ) { d3.select(this).style("fill","#F56C4E"); }
-       if ((d.click)%4 == 3 ) { d3.select(this).style("fill","#838690"); }
-    })
     .on("mouseover", function(d) {
             div.transition()
                 .duration(200)
